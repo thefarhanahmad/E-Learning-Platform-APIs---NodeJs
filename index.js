@@ -32,6 +32,10 @@ app.use("/api/v1", userRoutes);
 app.use("/api/v1", courseRoutes);
 app.use("/api/v1", enrolledCoursesRoutes);
 
+app.get("/", (req, res) => {
+  res.send("App is running!");
+});
+
 //activate
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
