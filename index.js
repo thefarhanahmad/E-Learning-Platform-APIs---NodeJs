@@ -33,7 +33,7 @@ app.use("/api/v1", courseRoutes);
 app.use("/api/v1", enrolledCoursesRoutes);
 
 app.get("/", (req, res) => {
-  res.send("App is running!");
+  res.send("App is running...!");
 });
 
 //activate

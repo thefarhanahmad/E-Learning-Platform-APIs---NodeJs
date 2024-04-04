@@ -3,15 +3,12 @@ const DB_URL = process.env.DB_URL;
 
 function dbConnection() {
   mongoose
-    .connect(DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    .connect(DB_URL)
     .then(() => {
       console.log("DB connected successfully");
     })
     .catch((err) => {
-      console.log("DB not connecting");
+      console.log("DB not connecting", err);
     });
 }
 
