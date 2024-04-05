@@ -3,7 +3,7 @@ const Course = require("../models/courseModel");
 const cloudinary = require("cloudinary").v2;
 
 // GET COURSES WITH FILTERS
-async function getCourses(req, res) {
+async function getFilteredCourses(req, res) {
   // Extract filtering and pagination parameters from query string
   const { category, level, sortBy, sortOrder, page, limit } = req.query;
 
@@ -122,6 +122,26 @@ async function createCourse(req, res) {
   }
 }
 
+// GET ALL COURSES
+const allCourses = async (req, res) => {
+  try {
+    // Fetch all courses from the database
+    const courses = await Course.find();
+
+    // Check if any courses were found
+    if (!courses || courses.length === 0) {
+      return res.status(404).json({ message: "No courses found" });
+    }
+
+    // Return the list of courses
+    res.json({ courses });
+  } catch (error) {
+    // Handle any errors
+    console.error("Error fetching courses:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // GET COURSE DETAILS
 async function getCourseDetails(req, res) {
   const courseId = req.params.id;
@@ -189,8 +209,9 @@ async function deleteCourse(req, res) {
 }
 
 module.exports = {
-  getCourses,
+  getFilteredCourses,
   createCourse,
+  allCourses,
   getCourseDetails,
   updateCourse,
   deleteCourse,
