@@ -3,8 +3,10 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const connectCloudinary = require("./config/cloudinaryConnect");
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 
 require("dotenv").config();
+
 //database connecting
 const dbConnect = require("./config/dbConnection");
 dbConnect();
@@ -13,6 +15,13 @@ connectCloudinary();
 //middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 //fileupload middleware to parse data from files.file
 app.use(

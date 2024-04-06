@@ -56,7 +56,9 @@ async function registerUser(req, res) {
     await sendMail.sendEmail(email, "Welcome to our platform!", emailText);
 
     // Return success response
-    return res.status(201).json({ message: "User registered successfully" });
+    return res
+      .status(201)
+      .json({ message: "User registered successfully", user: newUser });
   } catch (error) {
     console.error("Error registering user:", error);
     return res.status(500).json({ message: "Internal server error" });
