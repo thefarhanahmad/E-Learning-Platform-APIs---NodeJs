@@ -41,6 +41,7 @@ app.use("/api/v1", userRoutes);
 app.use("/api/v1", courseRoutes);
 app.use("/api/v1", enrolledCoursesRoutes);
 
+// default route
 app.get("/", (req, res) => {
   res.send("App is running...!");
 });
